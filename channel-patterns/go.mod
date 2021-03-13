@@ -1,4 +1,4 @@
-module github.com/davidtran641/go-beauty/src
+module github.com/davidtran641/go-beauty/channel-patterns
 
 go 1.15
 

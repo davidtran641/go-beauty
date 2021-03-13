@@ -1,5 +1,5 @@
 # Channel patterns in go
-Channel is a type in go to help goroutines to synchornize without explicit lock or condition variables. In this article, we will go through some *design pattern* we can do with channel
+Channel is a type in go to help goroutines to synchornize without explicit lock or condition variables. In this article, we will go through some *design patterns* that we can do with channel
 
 ## Basic about channel
 To declare channel
@@ -19,7 +19,7 @@ v := <- ch
 
 ## Channel patterns
 ### Channel generator
-Channels are first-class values, just like other types in go. A generator is a function that retuns a channel
+Channels are first-class values, just like other types in go. A generator is a function that returns a channel
 ```
 func NewOddNumbers(max int) <-chan int {
 	c := make(chan int)
@@ -114,7 +114,7 @@ It is useful when the job is cancelled and we want to tell the child goroutines 
 
 ```
 // NewFibonacci returns a channel for fibonacy numbers 
-// until it's recevied quit message from quit channel
+// until it's receiving a signal from quit channel
 func NewFibonacci(quit chan struct{}) <-chan int {
 	c := make(chan int)
 	go func() {
@@ -137,7 +137,7 @@ func NewFibonacci(quit chan struct{}) <-chan int {
 ```
 
 ### Daisy-chain of channels
-Channels can be chained together and create a very sequence, eg: c1 => c2 => c3,...
+Channels can be chained together and create a very long sequence, eg: c1 => c2 => c3,...,cN
 
 In this bellow example, it will create a chain of 10,000 channels:
 ```
@@ -169,7 +169,10 @@ func NewChain() <-chan int {
 [source](./src/daisychain)
 
 ### Channel on a channel
-A channel can be send on a channel as well. This can be used for back-ward communication via channel
+A channel can be send on a channel as well. This can be used for sending a message to the subsequence goroutine to:
+- wait for something before sending another message
+- wait for additional data from other jobs before continue to process
+
 ```
 type Message struct {
   result string

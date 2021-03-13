@@ -1,10 +1,9 @@
-package fanin_test
+package fanin
 
 import (
 	"sort"
 	"testing"
 
-	"github.com/davidtran641/go-beauty/src/fanin"
 	"gopkg.in/go-playground/assert.v1"
 )
 
@@ -19,7 +18,7 @@ func TestFanIn(t *testing.T) {
 	b <- "text-1"
 	b <- "text-2"
 
-	c := fanin.FanIn(a, b)
+	c := FanIn(a, b)
 	for i := 0; i < 4; i++ {
 		got = append(got, <-c)
 	}
