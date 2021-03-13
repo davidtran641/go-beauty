@@ -1,2 +1,4 @@
-# go-beauty
-The beaty of golang
+# Go Beauty
+A beauty collections of golang
+
+- [Channel patterns](./channel-patterns)
